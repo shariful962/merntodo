@@ -43,6 +43,10 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    // refreshToken: {
+    //   type: String,
+    //   default: null,
+    // },
     avatar: {
       type: String,
       default: null,
@@ -52,10 +56,9 @@ const userSchema = new mongoose.Schema(
 );
 
 // middleware
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
+userSchema.pre("save", async function () {
+  if (!this.isModified("password"))
+    this.password = await bcrypt.hash(this.password, 10);
 });
 // compare password method
 userSchema.methods.comparePassword = async function (enteredPassword) {
