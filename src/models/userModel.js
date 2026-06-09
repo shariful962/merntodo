@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema(
     //   type: String,
     //   default: null,
     // },
-    avatar: {
+    profile_pic: {
       type: String,
       default: null,
     },
@@ -57,8 +57,8 @@ const userSchema = new mongoose.Schema(
 
 // middleware
 userSchema.pre("save", async function () {
-  if (!this.isModified("password"))
-    this.password = await bcrypt.hash(this.password, 10);
+  if (!this.isModified("password")) return;
+  this.password = await bcrypt.hash(this.password, 10);
 });
 // compare password method
 userSchema.methods.comparePassword = async function (enteredPassword) {

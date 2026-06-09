@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import authRoutes from "./routes/authRoutes.js";
+import todoRoutes from "./routes/todoRoutes.js";
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(morgan("dev"));
 
 // route
 app.use("/api/auth", authRoutes);
+app.use("/api/todo", todoRoutes);
 
 // health check
 app.get("/", (req, res) => {

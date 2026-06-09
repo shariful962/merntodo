@@ -7,11 +7,16 @@ import { sendEmail } from "../utils/sendEmail.js";
 // register user
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
     //validation
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !confirmPassword) {
       return res.status(400).json({
         msg: "Please provide all the fields",
+      });
+    }
+    if (password !== confirmPassword) {
+      return res.status(400).json({
+        msg: "Password and confirm password do not match",
       });
     }
     // password validation

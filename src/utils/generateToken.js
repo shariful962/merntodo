@@ -7,7 +7,7 @@ export const generateToken = (user) => {
       email: user.email,
     },
     process.env.JWT_SECRET,
-    { expiresIn: "15m" },
+    { expiresIn: "15h" },
   );
 
   const refreshToken = jwt.sign(
