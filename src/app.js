@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import authRoutes from "./routes/authRoutes.js";
 import todoRoutes from "./routes/todoRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(morgan("dev"));
 // route
 app.use("/api/auth", authRoutes);
 app.use("/api/todo", todoRoutes);
+app.use("/api/admin", adminRoutes);
 
 // health check
 app.get("/", (req, res) => {
